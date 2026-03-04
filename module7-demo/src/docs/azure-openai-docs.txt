@@ -1,0 +1,21 @@
+Azure OpenAI Service — Documentation technique
+
+Azure OpenAI Service est un service managé Microsoft qui donne accès aux modèles GPT-4, GPT-3.5-Turbo, DALL-E et text-embedding via une API REST sécurisée et conforme aux exigences d'entreprise.
+
+Modèles disponibles
+Les modèles de chat disponibles incluent GPT-4o (multimodal, texte et image), GPT-4 Turbo (contexte 128K tokens), GPT-3.5-Turbo (rapide et économique). Pour les embeddings, text-embedding-3-small (1536 dimensions, $0.02/1M tokens) et text-embedding-3-large (3072 dimensions) sont disponibles. DALL-E 3 est disponible pour la génération d'images.
+
+Configuration et authentification
+Pour configurer Azure OpenAI dans une application .NET, installez le package Azure.AI.OpenAI. L'authentification se fait via une clé API (api-key dans les headers) ou via Azure Active Directory avec DefaultAzureCredential. La clé API se configure dans appsettings.json et ne doit jamais être commitée en clair dans Git — utilisez Azure Key Vault ou des variables d'environnement.
+
+Gestion des erreurs et retry
+L'API Azure OpenAI retourne des codes d'erreur HTTP standard : 401 (clé invalide), 429 (quota dépassé), 404 (déploiement introuvable), 500 (erreur serveur). Pour les erreurs 429, implémentez une logique de retry exponentiel. La classe RequestFailedException du SDK Azure expose le code HTTP et le message d'erreur structuré.
+
+Limites et quotas
+Les quotas sont définis par déploiement en Tokens Per Minute (TPM). Pour GPT-4o, le quota par défaut est de 10 000 TPM. Pour dépasser ces limites, soumettez une demande d'augmentation dans le portail Azure. Implémentez un compteur de tokens côté application pour anticiper les limites avant d'atteindre l'erreur 429.
+
+Streaming
+Pour une expérience utilisateur fluide, utilisez la méthode GetChatCompletionsStreamingAsync qui retourne les tokens au fur et à mesure de leur génération. Le streaming réduit la latence perçue et permet d'afficher les réponses progressivement. Utilisez await foreach pour consommer le flux de tokens.
+
+Coûts et facturation
+Azure OpenAI facture à l'usage par million de tokens. Les tokens d'entrée (prompt) et de sortie (completion) sont facturés séparément à des tarifs différents. Pour contrôler les coûts, limitez max_tokens dans chaque requête, utilisez GPT-3.5-Turbo pour les tâches simples, mettez en cache les réponses fréquentes et activez les alertes de budget Azure Cost Management.

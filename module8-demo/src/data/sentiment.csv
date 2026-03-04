@@ -1,0 +1,31 @@
+Text,Label
+"Ce produit est fantastique, je l'adore !",true
+"Livraison ultra rapide, très satisfait",true
+"Qualité parfaite, rapport qualité-prix imbattable",true
+"Je recommande vivement ce vendeur",true
+"Exactement ce que je cherchais, merci !",true
+"Emballage soigné, produit conforme à la description",true
+"Super service client, problème résolu en 5 minutes",true
+"Produit de qualité professionnelle",true
+"Très bon achat, je suis ravi",true
+"Parfait pour mon utilisation quotidienne",true
+"Expédition rapide et produit en excellent état",true
+"Je suis conquis, je rachèterai sans hésiter",true
+"Très bonne qualité, durable et solide",true
+"Service impeccable, livraison en avance",true
+"Produit conforme, livraison rapide. Très satisfait",true
+"Produit cassé à la réception, une honte",false
+"Livraison en retard de 2 semaines, inacceptable",false
+"Ne correspond absolument pas à la description",false
+"Qualité médiocre, je suis très déçu",false
+"Service client inexistant, impossible de les joindre",false
+"Arnaque totale, produit inutilisable",false
+"Emballage abîmé, produit rayé",false
+"Remboursement refusé malgré le produit défectueux",false
+"Très mauvaise expérience, à éviter absolument",false
+"Rien ne correspond à ce qui était annoncé",false
+"Pire achat de ma vie, qualité déplorable",false
+"Service après-vente catastrophique",false
+"Produit non fonctionnel dès la première utilisation",false
+"Je suis furieux, escroquerie pure et simple",false
+"Délai non respecté, pas de communication du vendeur",false

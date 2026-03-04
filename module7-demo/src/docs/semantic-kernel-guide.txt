@@ -1,0 +1,21 @@
+Semantic Kernel — Guide des plugins et orchestration
+
+Semantic Kernel est un SDK open-source Microsoft qui permet d'intégrer les LLM dans des applications .NET, Python ou Java. Il fournit une couche d'abstraction pour orchestrer les appels IA, gérer la mémoire et composer des workflows complexes.
+
+Architecture du Kernel
+Le Kernel est le point d'entrée central. Il se construit avec Kernel.CreateBuilder() en y ajoutant un connecteur LLM (Azure OpenAI, OpenAI, Ollama). Les plugins, la mémoire et les services sont enregistrés dans le Kernel et disponibles pour l'orchestration.
+
+Plugins natifs
+Un plugin natif est une classe C# dont les méthodes sont annotées avec [KernelFunction] et [Description]. L'attribut Description est crucial : il explique au LLM quand et comment utiliser la fonction. Les paramètres doivent également avoir des descriptions. Enregistrez le plugin avec kernel.Plugins.AddFromType<MonPlugin>().
+
+Auto Function Calling
+Avec FunctionChoiceBehavior.Auto(), le LLM décide automatiquement quels plugins appeler et dans quel ordre pour répondre à la demande de l'utilisateur. Il peut enchaîner plusieurs appels de fonctions avant de formuler sa réponse finale. Ce mode est idéal pour les assistants autonomes.
+
+Mémoire vectorielle
+Semantic Kernel dispose d'un système de mémoire vectorielle via ISemanticTextMemory. Utilisez MemoryBuilder pour configurer un store (VolatileMemoryStore en mémoire, ou Azure AI Search pour la production). La méthode SaveInformationAsync stocke du texte avec son embedding, SearchAsync recherche les passages les plus similaires à une requête.
+
+ChatHistory et multi-tour
+La classe ChatHistory maintient l'historique de la conversation. Ajoutez les messages avec AddSystemMessage, AddUserMessage et AddAssistantMessage. Passez l'historique complet à chaque appel GetChatMessageContentAsync pour que le LLM ait le contexte des échanges précédents.
+
+Gestion des erreurs dans SK
+Semantic Kernel propage les exceptions du LLM sous forme de KernelException ou d'exceptions spécifiques au connecteur (RequestFailedException pour Azure). Wrappez les appels dans des blocs try-catch et gérez séparément les erreurs de quota (429), d'authentification (401) et les timeouts.

@@ -1,0 +1,99 @@
+### Module 5 — Tests API IA
+### Utilisation : VSCode REST Client ou copier dans un terminal
+
+@baseUrl = http://localhost:5000
+
+# ── Health check ──────────────────────────────────────────────────────────────
+
+GET {{baseUrl}}/api/ai/health
+
+###
+
+# ── Chat — question simple ────────────────────────────────────────────────────
+
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "message": "Qu'est-ce que l'injection de dépendances en ASP.NET Core ?",
+  "temperature": 0.7,
+  "maxTokens": 300
+}
+
+###
+
+# ── Chat — température basse (réponse factuelle) ──────────────────────────────
+
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "message": "Explique les cycles de vie Singleton, Scoped et Transient en 3 phrases.",
+  "temperature": 0.0,
+  "maxTokens": 200
+}
+
+###
+
+# ── Summarize — format bullets ────────────────────────────────────────────────
+
+POST {{baseUrl}}/api/ai/summarize
+Content-Type: application/json
+
+{
+  "text": "ASP.NET Core est un framework web open-source et multiplateforme développé par Microsoft. Il permet de créer des applications web modernes, des API REST et des applications en temps réel. Il est basé sur le modèle de programmation MVC (Modèle-Vue-Contrôleur) et supporte Razor Pages et Blazor. ASP.NET Core est hautement performant et figure régulièrement en tête des benchmarks web. Il intègre nativement l'injection de dépendances, la configuration flexible et le middleware pipeline.",
+  "maxPoints": 3,
+  "format": 0
+}
+
+###
+
+# ── Summarize — format paragraphe ─────────────────────────────────────────────
+
+POST {{baseUrl}}/api/ai/summarize
+Content-Type: application/json
+
+{
+  "text": "ASP.NET Core est un framework web open-source et multiplateforme développé par Microsoft. Il permet de créer des applications web modernes, des API REST et des applications en temps réel. Il est basé sur le modèle de programmation MVC (Modèle-Vue-Contrôleur) et supporte Razor Pages et Blazor. ASP.NET Core est hautement performant et figure régulièrement en tête des benchmarks web. Il intègre nativement l'injection de dépendances, la configuration flexible et le middleware pipeline.",
+  "maxPoints": 2,
+  "format": 1
+}
+
+###
+
+# ── Summarize — format JSON ───────────────────────────────────────────────────
+
+POST {{baseUrl}}/api/ai/summarize
+Content-Type: application/json
+
+{
+  "text": "ASP.NET Core est un framework web open-source et multiplateforme développé par Microsoft. Il permet de créer des applications web modernes, des API REST et des applications en temps réel. Il est basé sur le modèle de programmation MVC (Modèle-Vue-Contrôleur) et supporte Razor Pages et Blazor. ASP.NET Core est hautement performant et figure régulièrement en tête des benchmarks web. Il intègre nativement l'injection de dépendances, la configuration flexible et le middleware pipeline.",
+  "maxPoints": 3,
+  "format": 2
+}
+
+###
+
+# ── Test validation — message trop court ─────────────────────────────────────
+
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "message": "",
+  "temperature": 0.7,
+  "maxTokens": 300
+}
+
+###
+
+# ── Test validation — température invalide ────────────────────────────────────
+
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "message": "Test",
+  "temperature": 5.0,
+  "maxTokens": 300
+}

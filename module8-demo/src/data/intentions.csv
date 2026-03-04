@@ -1,0 +1,25 @@
+Text,Label
+"Je voudrais commander 3 pizzas margherita",commande
+"Passer une commande pour livraison demain matin",commande
+"Ajouter au panier le produit référence X-42",commande
+"Je souhaite acheter 2 exemplaires de ce livre",commande
+"Commander le menu midi pour 4 personnes",commande
+"Réserver une table pour ce soir à 20h",commande
+"Je veux acheter ce vélo, comment procéder ?",commande
+"Passer une commande urgente pour demain",commande
+"Quels sont vos horaires d'ouverture le dimanche ?",question
+"Comment puis-je retourner un article défectueux ?",question
+"Quel est le délai de livraison standard ?",question
+"Où en est ma commande numéro 12345 ?",question
+"Acceptez-vous le paiement en plusieurs fois ?",question
+"Avez-vous ce modèle en taille L et en bleu ?",question
+"Comment contacter le service client ?",question
+"Quelle est votre politique de remboursement ?",question
+"Mon colis est perdu depuis 2 semaines, inacceptable",plainte
+"Le produit reçu est cassé, je réclame un remboursement",plainte
+"Service client injoignable, c'est honteux",plainte
+"Délai non respecté, personne ne me répond",plainte
+"Je suis scandalisé par la qualité de ce produit",plainte
+"Troisième livraison ratée, je veux être remboursé",plainte
+"Votre site m'a débité deux fois sans raison",plainte
+"Je dépose une réclamation formelle pour non-conformité",plainte

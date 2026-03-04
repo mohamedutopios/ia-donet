@@ -1,0 +1,24 @@
+ASP.NET Core — Guide de démarrage
+
+ASP.NET Core est un framework web open-source et multiplateforme développé par Microsoft. Il permet de créer des applications web modernes, des API REST, des applications en temps réel avec SignalR et des microservices.
+
+Prérequis techniques
+Pour utiliser ASP.NET Core 8, vous avez besoin du SDK .NET 8 installé sur votre machine. L'environnement de développement recommandé est Visual Studio 2022, Visual Studio Code avec l'extension C# ou JetBrains Rider. Aucune configuration particulière n'est requise pour démarrer un projet minimal.
+
+Installation et création de projet
+Pour créer une nouvelle API ASP.NET Core, utilisez la commande : dotnet new webapi -n MonApi. Cette commande génère un projet avec Swagger activé en développement, une configuration de base et les packages NuGet nécessaires.
+
+Injection de dépendances
+ASP.NET Core intègre nativement l'injection de dépendances (DI). Pour enregistrer un service, utilisez builder.Services.AddScoped<IMonService, MonService>() dans Program.cs. Les cycles de vie disponibles sont Singleton (une instance par application), Scoped (une instance par requête HTTP) et Transient (une nouvelle instance à chaque injection).
+
+Authentification et autorisation
+ASP.NET Core supporte plusieurs mécanismes d'authentification : JWT Bearer tokens, cookies, OAuth 2.0 et OpenID Connect. Pour configurer JWT, installez Microsoft.AspNetCore.Authentication.JwtBearer et configurez le middleware dans Program.cs avec builder.Services.AddAuthentication().AddJwtBearer(). Protégez vos endpoints avec l'attribut [Authorize].
+
+Middleware pipeline
+Le middleware ASP.NET Core est une chaîne de composants qui traitent les requêtes HTTP. L'ordre d'enregistrement est crucial : UseExceptionHandler, UseHttpsRedirection, UseAuthentication, UseAuthorization, puis MapControllers. Chaque middleware peut court-circuiter la pipeline ou passer la requête au suivant via next().
+
+Gestion des erreurs
+Pour une gestion globale des erreurs, implémentez un middleware personnalisé ou utilisez app.UseExceptionHandler. Le pattern Problem Details (RFC 7807) est recommandé pour les API REST : retourner un objet JSON standardisé avec type, title, status, detail et instance.
+
+Performance et optimisation
+ASP.NET Core est l'un des frameworks web les plus performants selon les benchmarks TechEmpower. Pour optimiser les performances : activez la compression des réponses avec UseResponseCompression, utilisez le cache distribué avec IDistributedCache, limitez la taille des requêtes et activez HTTP/2.
